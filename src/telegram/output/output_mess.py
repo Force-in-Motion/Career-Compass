@@ -18,4 +18,4 @@ class OutputMessage:
     main_menu = ''
     
     return_to_main_menu = f'Вы возвращены в главное меню, выберите команду\n\n {main_menu}'
-    
+    authorization_mess = 'Чтобы получать вакансии войдите или зарегистрируйтесь'
