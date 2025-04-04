@@ -3,6 +3,7 @@ from aiogram import Router, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
+from src.telegram.keyboard.inline import KBInline as kbi
 from src.telegram.output.output_mess import OutputMessage as om
 
 router = Router()
@@ -16,6 +17,7 @@ async def start_handler(message: types.Message) -> None:
     :return: None
     """
     await message.answer(om.opening_greeting)
+    await message.answer(om.authorization_mess, reply_markup=kbi.create_authorization_buttons())
 
 
 @router.message(Command('menu'))

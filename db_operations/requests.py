@@ -12,7 +12,7 @@ class Requests:
         """
 
     add_vacancies_table = """
-        CREATE TABLE IF NOT EXISTS User (
+        CREATE TABLE IF NOT EXISTS Vacancies (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         salary TEXT NOT NULL,
