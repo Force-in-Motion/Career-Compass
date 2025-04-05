@@ -1,4 +1,4 @@
-class Requests:
+class CreateTables:
 
     add_user_table = """
         CREATE TABLE IF NOT EXISTS User (

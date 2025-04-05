@@ -1,6 +1,6 @@
 import sqlite3
 
-from requests import Requests as rq
+from db_operations.requests.create_tables import CreateTables as ct
 from utils.file_utils import FileUtils as fu
 
 
@@ -16,7 +16,7 @@ class UserTable:
         Создает таблицу для хранения данных пользователей
         :return: None
         """
-        self.__cursor.execute(rq.add_user_table)
+        self.__cursor.execute(ct.add_user_table)
 
         self.__connect.commit()
 
@@ -33,7 +33,7 @@ class VacanciesTable:
         Создает таблицу для хранения данных вакансии
         :return: None
         """
-        self.__cursor.execute(rq.add_vacancies_table)
+        self.__cursor.execute(ct.add_vacancies_table)
 
         self.__connect.commit()
 
@@ -50,7 +50,7 @@ class QueriesTable:
         Создает таблицу для хранения данных запросов
         :return: None
         """
-        self.__cursor.execute(rq.add_queries_table)
+        self.__cursor.execute(ct.add_queries_table)
 
         self.__connect.commit()
 

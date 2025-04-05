@@ -1,8 +1,11 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class UserRegistration(StatesGroup):
+class Entrance(StatesGroup):
+    user_entrance = State()
 
+
+class UserRegistration(StatesGroup):
     user_name = State()
     user_password = State()
     user_email = State()
@@ -10,6 +13,5 @@ class UserRegistration(StatesGroup):
 
 
 class UserAuthorization(StatesGroup):
-
     user_name = State()
     user_password = State()

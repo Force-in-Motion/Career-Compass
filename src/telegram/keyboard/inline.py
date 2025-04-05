@@ -4,7 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 class KBInline:
 
     @staticmethod
-    def create_authorization_buttons():
+    def create_authorization_kb_inline():
         """
         Создает кнопки для регистрации или авторизации пользователя
         :return: None
@@ -20,7 +20,7 @@ class KBInline:
 
 
     @staticmethod
-    def create_main_menu_kb():
+    def create_main_menu_kb_inline():
         """
         Создает кнопку для возврата в главное меню
         :return: None
