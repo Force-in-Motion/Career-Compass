@@ -1,5 +1,6 @@
 
 import json
+import os
 from pathlib import Path
 
 
@@ -12,8 +13,15 @@ class FileUtils:
 
 
     @staticmethod
-    def get_db_path():
-        return Path('../storage/database.db').resolve()
+    def get_db_path() -> str:
+        """
+        Создает относительный путь к файлу common_areas
+        :return: Путь в виде строки
+        """
+        current_dir = os.path.dirname(__file__)
+        path_db = os.path.join(current_dir, '..', 'storage', 'database.db')
+
+        return os.path.abspath(path_db)
 
     
     @staticmethod

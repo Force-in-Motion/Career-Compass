@@ -1,6 +1,6 @@
 import sqlite3
 
-from db_operations.requests.create_tables import CreateTables as ct
+from db_operations.requests.tables import CreateTables as ct
 from utils.file_utils import FileUtils as fu
 
 

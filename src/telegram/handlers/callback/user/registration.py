@@ -10,9 +10,11 @@ from src.telegram.states.user import UserRegistration as us
 router = Router()
 
 
-@router.callback_query(StateFilter(et.user_entrance), F.data == 'registration')
+@router.callback_query(StateFilter(et.wait_entrance), F.data == 'registration')
 async def registration_callback_handler(callback: types.CallbackQuery, state: FSMContext) -> None:
     await callback.message.delete()
-    await callback.message.answer(om.input_name)
-    await state.set_state(us.user_name)
+    await callback.message.answer(om.reg_name)
+    await state.set_state(us.wait_reg_name)
     await callback.answer()
+
+

@@ -20,5 +20,7 @@ async def start_handler(message: types.Message, state: FSMContext) -> None:
     """
     await state.clear()
     await message.answer(om.opening_greeting)
-    await message.answer(om.authorization_mess, reply_markup=kbi.create_authorization_kb_inline())
-    await state.set_state(et.user_entrance)
+    mess = await message.answer(om.btn_selection, reply_markup=kbi.create_authorization_kb_inline())
+    await state.set_state(et.wait_entrance)
+    await state.update_data(mess_id=mess.message_id)
+
