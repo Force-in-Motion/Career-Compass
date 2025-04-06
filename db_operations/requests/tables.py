@@ -1,5 +1,7 @@
 class CreateTables:
-
+    """
+    Содержит запросы для создания таблиц
+    """
     add_user_table = """
         CREATE TABLE IF NOT EXISTS User (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

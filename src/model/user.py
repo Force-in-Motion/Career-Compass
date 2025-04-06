@@ -12,7 +12,7 @@ class UserData:
         self.__notifications = notifications
 
 
-    def save_user_in_db(self) -> None:
+    def add_new_user(self) -> None:
         """
         Сохраняет в базе данных нового пользователя
         :return: None

@@ -11,7 +11,7 @@ class UserQueries:
 
     def add_user(self, name: str, password: str, telegram_id: int) -> None:
         """
-        Добавляет в базу данных нового пользователя
+        Выполняя запрос добавляет в базу данных нового пользователя
         :param name: имя пользователя
         :param password: пароль пользователя
         :param telegram_id: telegram_id пользователя
@@ -21,20 +21,20 @@ class UserQueries:
 
         self.__connect.commit()
 
-    def get_all_names_user(self) -> list[str]:
+    def get_all_names_user(self) -> list[tuple[str]]:
         """
-        Возвращает все имена пользователей, хранящихся в базе данных
-        :return: tuple[str]
+        Выполняя запрос возвращает все имена пользователей, хранящихся в базе данных
+        :return: list[tuple[str]]
         """
         self.__cursor.execute(ur.get_all_user_name)
 
         return self.__cursor.fetchall()
 
-    def get_user_password(self, username):
+    def get_user_password(self, username) -> list[tuple[str]]:
         """
-        Возвращает пароль пользователя, соответствующий его имени в базе данных
+        Выполняя запрос возвращает пароль пользователя, соответствующий его имени в базе данных
         :param username: имя пользователя
-        :return:
+        :return: list[tuple[str]]
         """
         self.__cursor.execute(ur.get_password, (username,))
 

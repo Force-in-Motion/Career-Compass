@@ -10,6 +10,12 @@ router = Router()
 
 @router.callback_query(F.data == 'main_menu')
 async def return_to_main_menu_callback(callback: types.CallbackQuery, state: FSMContext) -> None:
+    """
+    Обрабатывает клик по кнопке возврата в главное меню
+    :param callback: кол бэк функцию
+    :param state: текущее состояние
+    :return: None
+    """
     await state.clear()
     await callback.message.answer(om.return_to_main_menu)
 
@@ -17,7 +23,7 @@ async def return_to_main_menu_callback(callback: types.CallbackQuery, state: FSM
 @router.message(F.text.lower() == 'главное меню')
 async def return_to_main_menu_message(message: types.Message, state: FSMContext) -> None:
     """
-    Обрабатывает полученный текст возврата в главное меню, сбрасывает все стейты
+    Обрабатывает полученное сообщение пользователя возврата в главное меню, сбрасывает все state
     :param message: сообщение пользователя
     :param state: текущее состояние
     :return: None

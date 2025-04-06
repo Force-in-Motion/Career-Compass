@@ -8,7 +8,7 @@ from src.telegram.handlers.message.user.registration import router as user_reg_m
 from src.telegram.handlers.callback.user.registration import router as user_reg_callback
 from src.telegram.handlers.message.user.authorization import router as user_auth_message
 from src.telegram.handlers.callback.user.authorization import router as user_auth_callback
-from src.telegram.handlers.message.error.incorrect_mess import router as incorrect_mess_entrance
+from src.telegram.handlers.message.error.incorrect_auth import router as incorrect_mess_entrance
 from utils.file_utils import FileUtils as fu
 
 

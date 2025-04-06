@@ -2,9 +2,8 @@ from aiogram import Router, F, types
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 
-
-from src.telegram.output.output_mess import OutputMessage as om
 from src.telegram.keyboard.inline import KBInline as kbi
+from src.telegram.output.output_mess import OutputMessage as om
 from src.telegram.states.user import Entrance as et
 
 router = Router()
@@ -16,7 +15,7 @@ async def incorrect_input_auth_handler(message: types.Message, state: FSMContext
     Обрабатывает неожиданный текст, полученный от пользователя во время регистрации или авторизации
     Удаляет предыдущее сообщение бота по id и последнее сообщение пользователя, тем самым очищая чат
     :param message: сообщение пользователя
-    :param state: состояние FSMContext
+    :param state: текущее состояние
     :return: None
     """
     data = await state.get_data()

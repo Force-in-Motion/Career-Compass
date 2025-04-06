@@ -1,6 +1,8 @@
 
 class UserRequest:
-
+    """
+    Содержит запросы для работы с таблицей пользователей
+    """
     get_all_user_name = """
         SELECT username From User
         """

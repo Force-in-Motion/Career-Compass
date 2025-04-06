@@ -13,7 +13,7 @@ class UserTable:
 
     def __create_user_table(self) -> None:
         """
-        Создает таблицу для хранения данных пользователей
+        Выполняя запрос создает таблицу для хранения данных пользователей
         :return: None
         """
         self.__cursor.execute(ct.add_user_table)
@@ -30,7 +30,7 @@ class VacanciesTable:
 
     def __create_vacancies_table(self) -> None:
         """
-        Создает таблицу для хранения данных вакансии
+        Выполняя запрос создает таблицу для хранения данных вакансии
         :return: None
         """
         self.__cursor.execute(ct.add_vacancies_table)
@@ -47,7 +47,7 @@ class QueriesTable:
 
     def __create_queries_table(self) -> None:
         """
-        Создает таблицу для хранения данных запросов
+        Выполняя запрос создает таблицу для хранения данных запросов
         :return: None
         """
         self.__cursor.execute(ct.add_queries_table)
