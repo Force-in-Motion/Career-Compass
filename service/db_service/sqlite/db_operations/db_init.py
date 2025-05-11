@@ -1,8 +1,5 @@
-import sqlite3
-
 from interface.db import ADBUser
-from service.db_service.db_operations.requests.tables import CreateTables as ct
-from tools.data_access import SqLiteConnector as sqlc
+from tools.data_access import Connector as c
 
 
 class DBOperations(ADBUser):
@@ -17,7 +14,7 @@ class DBOperations(ADBUser):
         Создает таблицу погоды в базе данных
         """
         try:
-            self._cursor, self._connect = sqlc.connect(create_table)
+            self._cursor, self._connect = c.sqlite_connect(create_table)
 
         except Exception as e:
             raise RuntimeError(f"Ошибка при создании таблицы: {e}")
@@ -42,7 +39,7 @@ class DBOperations(ADBUser):
             self.close_connect(self._cursor, self._connect)
 
 
-    def get_records(self) -> None | Exception:
+    def get_records(self) -> None:
         """
         Получает все записи из базы данных
         :return: Кортеж записей
@@ -75,13 +72,4 @@ class DBOperations(ADBUser):
 
 
 
-    def close_connect(self, cursor, connect) -> None:
-        """
-        Закрывает соединение с базой данных
-        :param cursor: объект курсора
-        :param connect: объект соединения
-        :return: None
-        """
-        if connect:
-            cursor.close()
-            connect.close()
+

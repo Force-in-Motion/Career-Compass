@@ -1,4 +1,4 @@
-from service.db_service.db_operations.queries.db_user import DBUserAdapter
+from service.db_service.sqlite.db_operations.db_user import DBUserAdapter
 
 uq = DBUserAdapter()
 

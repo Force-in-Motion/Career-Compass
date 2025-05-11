@@ -36,10 +36,10 @@ class FileUtils:
 
 
 
-class SqLiteConnector:
+class Connector:
 
     @staticmethod
-    def connect(query: str, params: tuple = ()):
+    def sqlite_connect(query: str, params: tuple = ()):
         """
         Выполняет SQL-запрос с параметрами (если есть) и возвращает курсор.
 
@@ -47,14 +47,28 @@ class SqLiteConnector:
         :param params: кортеж параметров для запроса (по умолчанию пустой)
         :return: sqlite3.Cursor
         """
-        conn = sqlite3.connect(FileUtils.get_path())
-        cursor = conn.cursor()
+        connect = sqlite3.connect(FileUtils.get_path())
+        cursor = connect.cursor()
 
         try:
             if params:
                 cursor.execute(query, params)
             else:
                 cursor.execute(query)
-            return cursor, conn
+            return cursor, connect
+
         except Exception as e:
             raise RuntimeError(f"Ошибка при выполнении запроса: {e}")
+
+
+    @staticmethod
+    def sqlite_close(connect, cursor) -> None:
+        """
+        Закрывает соединение если оно открыто
+        :param connect: объект соединения
+        :param cursor: объект курсора
+        :return:None
+        """
+        if connect:
+            connect.close()
+            cursor.close()

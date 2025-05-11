@@ -1,17 +1,12 @@
 from abc import ABC, abstractmethod
 
 
-class ADBUser(ABC):
+class AUserDataAccess(ABC):
 
     @abstractmethod
     def __init__(self):
         self._connect = None
         self._cursor = None
-        self._create_table()
-
-    @abstractmethod
-    def _create_table(self) -> None:
-        pass
 
 
     @abstractmethod
@@ -20,45 +15,45 @@ class ADBUser(ABC):
 
 
     @abstractmethod
-    def get_all_names_users(self) -> tuple[str]:
+    def get_all_username(self) -> tuple[str]:
         pass
 
 
     @abstractmethod
-    def get_password_by_username_and_telegram_id(self, *args) -> bool:
+    def get_password(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def get_email_by_username_and_telegram_id(self, *args) -> bool:
+    def get_email(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def get_way_notify_by_username_and_telegram_id(self, *args) -> bool:
+    def get_way_notify(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def update_username_by_password_and_telegram_id(self, *args) -> bool:
+    def update_username(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def update_password_by_username_and_telegram_id(self, *args) -> bool:
+    def update_password(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def update_email_by_username_and_telegram_id(self, *args) -> bool:
+    def update_email(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def update_way_notify_by_username_and_telegram_id(self, *args) -> bool:
+    def update_way_notify(self, *args) -> bool:
         pass
 
 
     @abstractmethod
-    def delete_user_by_username_and_telegram_id(self, *args) -> bool:
+    def delete_user(self, *args) -> bool:
         pass
