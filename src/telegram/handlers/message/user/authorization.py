@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 
 from src.telegram.output.output_mess import OutputMessage as om
 from src.telegram.states.user import UserAuthorization as ua
-from utils.processing import ProcessingData as pd
+from tools.processing import ProcessingData as pd
 
 router = Router()
 

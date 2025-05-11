@@ -1,11 +1,11 @@
 import sqlite3
-from utils.file_utils import FileUtils as fu
-from db_operations.requests.user import UserRequest as ur
-from db_operations.queries.db_init import UserTable
+from tools.data_access import FileUtils as fu
+from service.db_service.db_operations.requests.user import UserRequest as ur
+from service.db_service.db_operations.queries.db_init import UserTable
 
-class UserQueries:
+class SqLiteUserAdapter:
     def __init__(self):
-        self.__connect = sqlite3.connect(fu.get_db_path())
+        self.__connect = sqlite3.connect(fu.get_path())
         self.__cursor = self.__connect.cursor()
         self.__user_table = UserTable()
 

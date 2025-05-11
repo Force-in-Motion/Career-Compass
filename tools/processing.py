@@ -1,6 +1,6 @@
-from db_operations.queries.db_user import UserQueries
+from service.db_service.db_operations.queries.db_user import DBUserAdapter
 
-uq = UserQueries()
+uq = DBUserAdapter()
 
 class ProcessingData:
 

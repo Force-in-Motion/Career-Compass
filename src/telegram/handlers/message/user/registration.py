@@ -8,7 +8,7 @@ from aiogram.fsm.context import FSMContext
 from src.model.user import UserData
 from src.telegram.output.output_mess import OutputMessage as om
 from src.telegram.states.user import UserRegistration as ur
-from utils.processing import ProcessingData as pd
+from tools.processing import ProcessingData as pd
 
 router = Router()
 
