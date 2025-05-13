@@ -1,6 +1,5 @@
-from service.db_service.sqlite.db_operations.db_user import DBUserAdapter
+from service.db_service.sqlite.db_operations.user import UserAdapter
 
-uq = DBUserAdapter()
 
 class ProcessingData:
 
