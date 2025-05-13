@@ -1,6 +1,6 @@
 
     creating_tables = {
-                'add_user_table': """
+                'user_table': """
                     CREATE TABLE IF NOT EXISTS User (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username TEXT NOT NULL,
@@ -11,11 +11,11 @@
                     )
                     """,
 
-                'add_vacancies_table': """
+                'vacancies_table': """
                     CREATE TABLE IF NOT EXISTS Vacancies (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    salary TEXT NOT NULL,
+                    name_profession TEXT NOT NULL,
+                    salary INTEGER NOT NULL,
                     company TEXT NOT NULL,
                     description TEXT NOT NULL,
                     link TEXT NOT NULL,
@@ -24,11 +24,13 @@
                     )
                     """,
 
-                'add_queries_table': """
+                'queries_table': """
                     CREATE TABLE IF NOT EXISTS Queries (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     user_id INTEGER NOT NULL,
-                    search_params TEXT NOT NULL,
+                    city TEXT NOT NULL,
+                    name_profession TEXT NOT NULL,
+                    salary INTEGER NOT NULL,
                     date_request TEXT NOT NULL,
                     FOREIGN KEY (user_id) REFERENCES Users (id)
                     )
