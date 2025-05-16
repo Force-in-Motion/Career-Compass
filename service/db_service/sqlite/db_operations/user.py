@@ -1,9 +1,8 @@
-from logging import getLogger
-from interface.db.user import AUserDataAccess
+from interface.db_service import AUserAdapter
 from service.db_service.sqlite.requests.user import user_request as ur
 from tools.data_access import Connector as c
 
-class UserAdapter(AUserDataAccess):
+class UserAdapter(AUserAdapter):
     def __init__(self):
         self._connect = None
         self._cursor = None

@@ -1,9 +1,9 @@
-from interface.db.vacancies import AVacanciesDataAccess
+from interface.db.adapter.vacancies import AVacanciesAdapter
 from service.db_service.sqlite.requests.vacancies import vacancies_request as v
 from tools.data_access import Connector as c
 
 
-class VacancyAdapter(AVacanciesDataAccess):
+class VacancyAdapter(AVacanciesAdapter):
 
     def __init__(self):
         self._connect = None

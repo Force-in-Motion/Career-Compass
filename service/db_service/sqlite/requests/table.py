@@ -33,7 +33,6 @@
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     user_id INTEGER,
                     vacancy_id INTEGER,
-                    is_viewed INTEGER DEFAULT 0,
                     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
                     FOREIGN KEY(vacancy_id) REFERENCES vacancies(id) ON DELETE CASCADE
                     )
@@ -48,7 +47,7 @@
                     salary_min INTEGER NOT NULL,
                     experience_level TEXT,
                     date_request TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY (user_id) REFERENCES Users (id)
+                    FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE
                     )
                     """
     }
