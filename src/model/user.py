@@ -1,7 +1,7 @@
 from  pydantic import EmailStr
-from service.db_service.sqlite.db_operations.user import DBUserAdapter
+from service.db_service.sqlite.db_operations.user import UserAdapter
 
-uq = DBUserAdapter()
+ua = UserAdapter()
 
 class UserData:
     def __init__(self, username: str, password: str, telegram_id: int, email: EmailStr = None, notifications: str = None):

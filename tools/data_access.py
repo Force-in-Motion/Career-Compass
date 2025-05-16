@@ -1,9 +1,5 @@
-import json
 import os
 import sqlite3
-from config.path import *
-
-
 
 
 
@@ -22,17 +18,6 @@ class FileUtils:
 
         return os.path.abspath(path)
 
-    
-    @staticmethod
-    def get_token() -> str:
-        """
-        Получает токен по указанному пути
-        :return: Токен в виде строки
-        """
-        with open(FileUtils.get_path(token), 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            return data['TOKEN']
-
 
 
 
@@ -45,7 +30,7 @@ class Connector:
 
         :param query: SQL-запрос в виде строки
         :param params: кортеж параметров для запроса (по умолчанию пустой)
-        :return: sqlite3.Cursor
+        :return: sqlite3.connect, sqlite3.cursor
         """
         connect = sqlite3.connect(FileUtils.get_path())
         cursor = connect.cursor()

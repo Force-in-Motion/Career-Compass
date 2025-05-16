@@ -1,3 +1,4 @@
+from logging import getLogger
 from interface.db.user import AUserDataAccess
 from service.db_service.sqlite.requests.user import user_request as ur
 from tools.data_access import Connector as c
