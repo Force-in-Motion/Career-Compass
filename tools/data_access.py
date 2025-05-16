@@ -1,5 +1,5 @@
 import os
-import sqlite3
+import aiosqlite
 
 
 
@@ -24,7 +24,7 @@ class FileUtils:
 class Connector:
 
     @staticmethod
-    def sqlite_connect(query: str, params: tuple = ()):
+    async def sqlite_connect(query: str, params: tuple = ()):
         """
         Выполняет SQL-запрос с параметрами (если есть) и возвращает курсор.
 
@@ -32,14 +32,14 @@ class Connector:
         :param params: кортеж параметров для запроса (по умолчанию пустой)
         :return: sqlite3.connect, sqlite3.cursor
         """
-        connect = sqlite3.connect(FileUtils.get_path())
-        cursor = connect.cursor()
+        connect = await aiosqlite.connect(FileUtils.get_path())
+        cursor = await connect.cursor()
 
         try:
             if params:
-                cursor.execute(query, params)
+                await cursor.execute(query, params)
             else:
-                cursor.execute(query)
+                await cursor.execute(query)
             return cursor, connect
 
         except Exception as e:
@@ -47,7 +47,7 @@ class Connector:
 
 
     @staticmethod
-    def sqlite_close(connect, cursor) -> None:
+    async def sqlite_close(connect, cursor) -> None:
         """
         Закрывает соединение если оно открыто
         :param connect: объект соединения
@@ -55,5 +55,5 @@ class Connector:
         :return:None
         """
         if connect:
-            connect.close()
-            cursor.close()
+            await connect.close()
+            await cursor.close()
