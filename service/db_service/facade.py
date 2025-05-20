@@ -23,6 +23,7 @@ class DatabaseFacade(AFacade):
 
 
     async def get_all_username(self):
+
         all_username = self._user_adapter.get_all_username()
         return all_username
 
