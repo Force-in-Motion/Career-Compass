@@ -1,4 +1,5 @@
 from logging import getLogger
+
 from interface.db_service import AUserAdapter
 from service.db_service.sqlite.requests.user import user_request as ur
 from tools.data_access import Connector as c
@@ -34,7 +35,7 @@ class UserAdapter(AUserAdapter):
             await c.sqlite_close(self._connect, self._cursor)
 
 
-    async def get_all_username(self) -> tuple[str]:
+    async def get_all_username(self) -> tuple[tuple[str]]:
         """
         Получает данные пользователя из базы в случае успешного выполнения запроса
         :return: имена всех пользователей

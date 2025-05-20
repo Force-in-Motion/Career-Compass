@@ -131,7 +131,11 @@ class AFacade(ABC):
         pass
 
     @abstractmethod
-    def get_all_username(self) -> tuple[str]:
+    def get_all_username(self) -> tuple[tuple[str]]:
+        pass
+
+    @abstractmethod
+    def get_userid(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod

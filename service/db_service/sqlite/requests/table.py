@@ -8,8 +8,7 @@
                     password TEXT NOT NULL,
                     telegram_id INTEGER UNIQUE NOT NULL,
                     email TEXT,
-                    notifications TEXT,
-                    is_active INTEGER,
+                    way_notify TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )
                     """,

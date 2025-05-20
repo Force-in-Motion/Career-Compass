@@ -1,22 +1,30 @@
-from pydantic import EmailStr
+from datetime import datetime
+
+from pydantic import EmailStr, BaseModel
 
 from service.db_service.sqlite.db_operations.user import UserAdapter
 
 ua = UserAdapter()
 
-class User:
-    def __init__(self, username: str, password: str, telegram_id: int, email: EmailStr = None, notifications: str = None):
-        self.__username = username
-        self.__password = password
-        self.__telegram_id = telegram_id
-        self.__email = email
-        self.__notifications = notifications
+class User(BaseModel):
+        username: str
+        password: str
+        telegram_id: int
+        email: EmailStr | None
+        notifications: str | None
 
 
-    def add_new_user(self) -> None:
-        """
-        Сохраняет в базе данных нового пользователя
-        :return: None
-        """
-        uq.add_user(self.__username, self.__password, self.__telegram_id)
 
+
+
+
+
+class Vacancy(BaseModel):
+    profession: str
+    requirements: str
+    description: str
+    salary: int
+    company: str
+    link: str
+    city: str
+    date_added: datetime
