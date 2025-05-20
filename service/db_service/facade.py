@@ -23,7 +23,10 @@ class DatabaseFacade(AFacade):
 
 
     async def get_all_username(self):
-
+        """
+        Возвращает имена всех пользователей системы
+        :return:
+        """
         all_username = self._user_adapter.get_all_username()
         return all_username
 
