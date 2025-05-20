@@ -32,6 +32,11 @@ class DatabaseFacade(AFacade):
 
 
     async def get_password(self, *args):
+        """
+        Возвращает пароль пользователя
+        :param args: username, telegram_id
+        :return:
+        """
         password = self._user_adapter.get_password(args)
         return password
 
