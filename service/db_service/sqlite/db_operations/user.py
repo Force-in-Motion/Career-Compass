@@ -19,6 +19,8 @@ class UserAdapter(AUserAdapter):
 
             await self._connect.commit()
 
+            logger.debug('add_user успешно добавила пользователя')
+
         except Exception as e:
             raise RuntimeError(f"Ошибка при добавлении пользователя: {e}")
 

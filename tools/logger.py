@@ -14,6 +14,6 @@ def logger_config():
 
     console_handler.setLevel(ERROR)
 
-    basicConfig(level=DEBUG, format=data_format, handlers=[file_handler, console_handler])
+    basicConfig(format=data_format, handlers=[file_handler, console_handler])
 
     return logger
