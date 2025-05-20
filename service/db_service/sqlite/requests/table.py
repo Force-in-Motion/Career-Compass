@@ -17,7 +17,7 @@
                 'vacancies_table': """
                     CREATE TABLE IF NOT EXISTS Vacancies (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    title TEXT NOT NULL,
+                    profession TEXT NOT NULL,
                     requirements TEXT,
                     description TEXT NOT NULL,
                     salary INTEGER NOT NULL,
@@ -33,10 +33,10 @@
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     user_id INTEGER NOT NULL,
                     city TEXT NOT NULL,
-                    name_profession TEXT NOT NULL,
+                    profession TEXT NOT NULL,
                     salary_min INTEGER NOT NULL,
                     experience_level TEXT,
-                    date_request TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE
                     )
                     """

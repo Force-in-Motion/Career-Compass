@@ -40,6 +40,7 @@ class Connector:
                 await cursor.execute(query, params)
             else:
                 await cursor.execute(query)
+
             return cursor, connect
 
         except Exception as e:

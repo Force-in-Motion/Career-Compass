@@ -19,7 +19,7 @@ class DatabaseFacade(AFacade):
         :param args: данные пользователя
         :return:None
         """
-        self._user_adapter.add_user(args)
+        await self._user_adapter.add_user(args)
 
 
     async def get_all_username(self):
@@ -27,8 +27,8 @@ class DatabaseFacade(AFacade):
         Возвращает имена всех пользователей системы
         :return:
         """
-        all_username = self._user_adapter.get_all_username()
-        return all_username
+        return await self._user_adapter.get_all_username()
+
 
 
     async def get_password(self, *args):
@@ -37,46 +37,43 @@ class DatabaseFacade(AFacade):
         :param args: username, telegram_id
         :return:
         """
-        password = self._user_adapter.get_password(args)
-        return password
+        return await self._user_adapter.get_password_by_username_and_telegramid(args)
 
 
     async def get_email(self, *args):
-        email = self._user_adapter.get_email(args)
-        return email
+        return await self._user_adapter.get_email_by_username_and_telegramid(args)
 
 
     async def get_way_notify(self, *args):
-        way_notify = self._user_adapter.get_way_notify(args)
-        return way_notify
+        return await self._user_adapter.get_way_notify_by_username_and_telegramid(args)
 
 
     async def update_username(self, *args) -> None:
-        self._user_adapter.update_username(args)
+        await self._user_adapter.update_username_by_password_and_telegramid(args)
 
 
     async def update_password(self, *args) -> None:
-        self._user_adapter.update_password(args)
+        await self._user_adapter.update_password_by_username_and_telegramid(args)
 
 
     async def update_email(self, *args) -> None:
-        self._user_adapter.update_email(args)
+        await self._user_adapter.update_email_by_username_and_telegramid(args)
 
 
     async def update_way_notify(self, *args) -> None:
-        self._user_adapter.update_way_notify(args)
+        await self._user_adapter.update_way_notify_by_username_and_telegramid(args)
 
 
     async def delete_user(self, *args) -> None:
-        self._user_adapter.delete_user(args)
+        await self._user_adapter.delete_user_by_username_and_telegramid(args)
 
 
     async def add_vacancy(self, *args) -> None:
-        self._vacancies_adapter.add_vacancy(args)
+        await self._vacancies_adapter.add_vacancy(args)
 
 
     async def get_vacancies(self):
-        self._vacancies_adapter.get_vacancies()
+        await self._vacancies_adapter.get_vacancies()
 
 
     async def del_vacancies(self) -> None:
@@ -84,10 +81,12 @@ class DatabaseFacade(AFacade):
 
 
     async def add_query(self, *args) -> None:
-        pass
+        self._queries_adapter.add_query_by_user_id(args)
+
 
     async def get_query(self):
-        pass
+        return await self._queries_adapter.get_query_by_userid()
+
 
     async def del_query(self) -> None:
         pass

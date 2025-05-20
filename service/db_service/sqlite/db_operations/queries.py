@@ -1,56 +1,81 @@
 from logging import getLogger
+
 from interface.db_service import AQueriesAdapter
-from service.db_service.sqlite.requests.user import user_request as ur
+from service.db_service.sqlite.requests.queries import queries_request as qr
 from tools.data_access import Connector as c
 
 logger = getLogger(__name__)
 
+
 class QueriesAdapter(AQueriesAdapter):
+    """ Осуществляет доступ к данным запросов пользователей """
 
     def __init__(self):
         self._connect = None
         self._cursor = None
 
 
-    def add_query(self, *args) -> None:
+    async def add_query_by_userid(self, *args) -> None:
 
         try:
-            self._connect, self._cursor = c.sqlite_connect(*args)
+            self._connect, self._cursor = await c.sqlite_connect(qr.get('add_query'), *args)
 
-            self._connect.commit()
+            await self._connect.commit()
 
-            logger.debug('Данных запроса пользователя успешно добавлены')
+            logger.debug('add_query_by_userid успешно добавила параметры поиска работы пользователя')
 
         except Exception as e:
             raise RuntimeError(f"Ошибка при добавлении данных запроса пользователя: {e}")
 
         finally:
-            c.sqlite_close(self._connect, self._cursor)
+            await c.sqlite_close(self._connect, self._cursor)
 
 
-    def get_query(self) -> tuple[str]:
+    async def get_query_by_userid(self, *args) -> tuple[str]:
         try:
-            self._connect, self._cursor = c.sqlite_connect()
+            self._connect, self._cursor = await c.sqlite_connect(qr.get('get_query'), *args)
 
-            logger.debug('Данных запроса пользователя успешно добавлены')
+            result = await self._cursor.fetchone()
+
+            logger.debug('get_query_by_userid вернула %s', result)
+
+            return result
 
         except Exception as e:
             raise RuntimeError(f"Ошибка при получении данных запроса пользователя: {e}")
 
         finally:
-            c.sqlite_close(self._connect, self._cursor)
+            await c.sqlite_close(self._connect, self._cursor)
 
-    def del_query(self) -> None:
+
+
+    async def update_query_by_userid(self, *args) -> tuple[str]:
 
         try:
-            self._connect, self._cursor = c.sqlite_connect()
+            self._connect, self._cursor = await c.sqlite_connect(qr.get('update_query'), *args)
 
-            self._connect.commit()
+            await self._connect.commit()
 
-            logger.debug('Данных запроса пользователя успешно удалены')
+            logger.debug('update_query_by_userid успешно обновила параметры поиска работы пользователя')
 
         except Exception as e:
             raise RuntimeError(f"Ошибка при удалении данных запроса пользователя: {e}")
 
         finally:
-            c.sqlite_close(self._connect, self._cursor)
+            await c.sqlite_close(self._connect, self._cursor)
+
+
+    async def del_query_by_userid(self, *args) -> None:
+
+        try:
+            self._connect, self._cursor = await c.sqlite_connect(qr.get('del_query'), *args)
+
+            await self._connect.commit()
+
+            logger.debug('del_query_by_userid успешно удалила параметры поиска работы пользователя')
+
+        except Exception as e:
+            raise RuntimeError(f"Ошибка при удалении данных запроса пользователя: {e}")
+
+        finally:
+            await c.sqlite_close(self._connect, self._cursor)

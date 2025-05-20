@@ -1,9 +1,10 @@
-from  pydantic import EmailStr
+from pydantic import EmailStr
+
 from service.db_service.sqlite.db_operations.user import UserAdapter
 
 ua = UserAdapter()
 
-class UserData:
+class User:
     def __init__(self, username: str, password: str, telegram_id: int, email: EmailStr = None, notifications: str = None):
         self.__username = username
         self.__password = password

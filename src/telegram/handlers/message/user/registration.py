@@ -5,7 +5,7 @@ from aiogram import Router, types
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 
-from src.model.user import UserData
+from src.model.user import User
 from src.telegram.output.output_mess import OutputMessage as om
 from src.telegram.states.user import UserRegistration as ur
 from tools.processing import ProcessingData as pd
@@ -48,7 +48,7 @@ async def input_password_handler(message: types.Message, state: FSMContext) -> N
     await state.update_data(password=message.text)
     await message.reply(om.success_reg_pass)
     data = await state.get_data()
-    user = UserData(username=data.get('username'), password=data.get('password'), telegram_id=data.get('telegram_id'))
+    user = User(username=data.get('username'), password=data.get('password'), telegram_id=data.get('telegram_id'))
     user.add_new_user()
     await asyncio.sleep(2)
     await message.answer(om.success_reg_user)

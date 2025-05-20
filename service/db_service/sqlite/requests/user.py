@@ -7,7 +7,10 @@ user_request = {
                 'add_user': """
                     INSERT INTO User (username, password, telegram_id) VALUES (?, ?, ?)
                     """,
-
+                'get_id': """
+                    SELECT id FROM User WHERE username = ? and telegram_id = ?
+                    """,
+    
                 'get_password': """
                     SELECT password FROM User WHERE username = ? and telegram_id = ?
                     """,

@@ -9,11 +9,11 @@ class ADBInit(ABC):
         self._cursor = None
 
     @abstractmethod
-    def _create_table(self, request):
+    def _create_table(self, query) -> None:
         pass
 
     @abstractmethod
-    def init_db(self):
+    def init_db(self) -> None:
         pass
 
 
@@ -26,7 +26,6 @@ class AUserAdapter(ABC):
         self._connect = None
         self._cursor = None
 
-
     @abstractmethod
     def add_user(self, *args) -> None:
         pass
@@ -36,35 +35,39 @@ class AUserAdapter(ABC):
         pass
 
     @abstractmethod
-    def get_password(self, *args) -> bool:
+    def get_userid_by_username_and_telegramid(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def get_email(self, *args) -> bool:
+    def get_password_by_username_and_telegramid(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def get_way_notify(self, *args) -> bool:
+    def get_email_by_username_and_telegramid(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def update_username(self, *args) -> bool:
+    def get_way_notify_by_username_and_telegramid(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def update_password(self, *args) -> bool:
+    def update_username_by_password_and_telegramid(self, *args) -> None:
         pass
 
     @abstractmethod
-    def update_email(self, *args) -> bool:
+    def update_password_by_username_and_telegramid(self, *args) -> None:
         pass
 
     @abstractmethod
-    def update_way_notify(self, *args) -> bool:
+    def update_email_by_username_and_telegramid(self, *args) -> None:
         pass
 
     @abstractmethod
-    def delete_user(self, *args) -> bool:
+    def update_way_notify_by_username_and_telegramid(self, *args) -> None:
+        pass
+
+    @abstractmethod
+    def delete_user_by_username_and_telegramid(self, *args) -> None:
         pass
 
 
@@ -85,7 +88,7 @@ class AVacanciesAdapter(ABC):
         pass
 
     @abstractmethod
-    def del_vacancies(self) -> tuple[str]:
+    def del_vacancies(self) -> None:
         pass
 
 
@@ -98,25 +101,25 @@ class AQueriesAdapter(ABC):
         self._cursor = None
 
     @abstractmethod
-    def add_query(self, *args) -> None:
+    def add_query_by_userid(self, *args) -> None:
         pass
 
     @abstractmethod
-    def get_query(self) -> tuple[str]:
+    def get_query_by_userid(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def del_query(self) -> tuple[str]:
+    def update_query_by_userid(self, *args) -> None:
+        pass
+
+    @abstractmethod
+    def del_query_by_userid(self, *args) -> None:
         pass
 
 
 
 class AFacade(ABC):
-    def __init__(self, db_init: ADBInit,
-                       user_adapter: AUserAdapter,
-                       queries_adapter: AQueriesAdapter,
-                       vacancies_adapter: AVacanciesAdapter):
-
+    def __init__(self, db_init, user_adapter, queries_adapter, vacancies_adapter):
         self._db_init = db_init
         self._user_adapter = user_adapter
         self._queries_adapter = queries_adapter
@@ -132,35 +135,35 @@ class AFacade(ABC):
         pass
 
     @abstractmethod
-    def get_password(self, *args) -> bool:
+    def get_password(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def get_email(self, *args) -> bool:
+    def get_email(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def get_way_notify(self, *args) -> bool:
+    def get_way_notify(self, *args) -> tuple[str]:
         pass
 
     @abstractmethod
-    def update_username(self, *args) -> bool:
+    def update_username(self, *args) -> None:
         pass
 
     @abstractmethod
-    def update_password(self, *args) -> bool:
+    def update_password(self, *args) -> None:
         pass
 
     @abstractmethod
-    def update_email(self, *args) -> bool:
+    def update_email(self, *args) -> None:
         pass
 
     @abstractmethod
-    def update_way_notify(self, *args) -> bool:
+    def update_way_notify(self, *args) -> None:
         pass
 
     @abstractmethod
-    def delete_user(self, *args) -> bool:
+    def delete_user(self, *args) -> None:
         pass
 
     @abstractmethod
@@ -172,7 +175,7 @@ class AFacade(ABC):
         pass
 
     @abstractmethod
-    def del_vacancies(self) -> tuple[str]:
+    def del_vacancies(self) -> None:
         pass
 
     @abstractmethod
@@ -184,5 +187,5 @@ class AFacade(ABC):
         pass
 
     @abstractmethod
-    def del_query(self) -> tuple[str]:
+    def del_query(self) -> None:
         pass
