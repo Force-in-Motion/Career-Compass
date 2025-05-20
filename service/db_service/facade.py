@@ -2,6 +2,8 @@ from interface.db_service import AFacade
 
 
 class DatabaseFacade(AFacade):
+    """ Предоставляет апи сервиса работы с базой данных """
+
     def __init__(self, db_init, user_adapter, queries_adapter, vacancies_adapter):
         super().__init__(db_init, user_adapter, queries_adapter, vacancies_adapter)
         self._db_init = db_init
@@ -12,6 +14,11 @@ class DatabaseFacade(AFacade):
 
 
     async def add_user(self, *args) -> None:
+        """
+        Добавляет пользователя
+        :param args:
+        :return:
+        """
         self._user_adapter.add_user(args)
 
 
