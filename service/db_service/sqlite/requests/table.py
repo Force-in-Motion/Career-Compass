@@ -36,7 +36,6 @@
                     profession TEXT NOT NULL,
                     salary_min INTEGER NOT NULL,
                     experience_level TEXT,
-                    date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE
                     )
                     """

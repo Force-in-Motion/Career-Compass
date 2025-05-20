@@ -187,5 +187,9 @@ class AFacade(ABC):
         pass
 
     @abstractmethod
+    def update_query(self) -> None:
+        pass
+
+    @abstractmethod
     def del_query(self) -> None:
         pass

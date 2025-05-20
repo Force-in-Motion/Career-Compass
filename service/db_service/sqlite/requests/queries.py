@@ -10,7 +10,7 @@ queries_request = {
                         """,
 
                     'update_query': """
-                        UPDATE Queries SET user_id = ?, city = ?, profession = ?, salary_min = ?, experience_level = ?, date_added = ?
+                        UPDATE Queries SET city = ?, profession = ?, salary_min = ?, experience_level = ?, date_added = ?
                         WHERE user_id = ?
                         """,
 

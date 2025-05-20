@@ -8,7 +8,7 @@ logger = getLogger(__name__)
 
 
 class QueriesAdapter(AQueriesAdapter):
-    """ Осуществляет доступ к данным запросов пользователей """
+    """ Осуществляет доступ к данным параметров запроса пользователей """
 
     def __init__(self):
         self._connect = None
@@ -16,7 +16,11 @@ class QueriesAdapter(AQueriesAdapter):
 
 
     async def add_query_by_userid(self, *args) -> None:
-
+        """
+        Добавляет параметры запроса пользователя в базу если запрос выполнился успешно
+        :param args: user_id, city, profession, salary_min, experience_level
+        :return: None
+        """
         try:
             self._connect, self._cursor = await c.sqlite_connect(qr.get('add_query'), *args)
 
@@ -32,6 +36,11 @@ class QueriesAdapter(AQueriesAdapter):
 
 
     async def get_query_by_userid(self, *args) -> tuple[str]:
+        """
+        Получает параметры запроса пользователя из базы если запрос выполнился успешно
+        :param args: user_id
+        :return: tuple[str]
+        """
         try:
             self._connect, self._cursor = await c.sqlite_connect(qr.get('get_query'), *args)
 
@@ -49,8 +58,12 @@ class QueriesAdapter(AQueriesAdapter):
 
 
 
-    async def update_query_by_userid(self, *args) -> tuple[str]:
-
+    async def update_query_by_userid(self, *args) -> None:
+        """
+        Обновляет параметры запроса пользователя в базе если запрос выполнился успешно
+        :param args: user_id, city, profession, salary_min, experience_level
+        :return: None
+        """
         try:
             self._connect, self._cursor = await c.sqlite_connect(qr.get('update_query'), *args)
 
@@ -66,7 +79,11 @@ class QueriesAdapter(AQueriesAdapter):
 
 
     async def del_query_by_userid(self, *args) -> None:
-
+        """
+        Удаляет параметры запроса пользователя из базы если запрос выполнился успешно
+        :param args: user_id
+        :return: None
+        """
         try:
             self._connect, self._cursor = await c.sqlite_connect(qr.get('del_query'), *args)
 
