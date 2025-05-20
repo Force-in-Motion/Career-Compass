@@ -1,59 +1,79 @@
-from service.db_service.sqlite.db_operations.user import UserAdapter
+from interface.db_service import AFacade
 
 
-class DatabaseFacade(ABC):
-    def __init__(self, db_init, user_adapter, queries_adapter):
+class DatabaseFacade(AFacade):
+    def __init__(self, db_init, user_adapter, queries_adapter, vacancies_adapter):
+        super().__init__(db_init, user_adapter, queries_adapter, vacancies_adapter)
         self._db_init = db_init
         self._user_adapter = user_adapter
         self._queries_adapter = queries_adapter
+        self._vacancies_adapter = vacancies_adapter
         self._db_init.init_db()
 
-    def add_user(self, *args) -> None:
+
+    async def add_user(self, *args) -> None:
         self._user_adapter.add_user(args)
 
-    def get_all_username(self) -> tuple[str]:
+
+    async def get_all_username(self):
+        all_username = self._user_adapter.get_all_username()
+        return all_username
+
+
+    async def get_password(self, *args):
+        password = self._user_adapter.get_password(args)
+        return password
+
+
+    async def get_email(self, *args):
+        email = self._user_adapter.get_email(args)
+        return email
+
+
+    async def get_way_notify(self, *args):
+        way_notify = self._user_adapter.get_way_notify(args)
+        return way_notify
+
+
+    async def update_username(self, *args) -> None:
+        self._user_adapter.update_username(args)
+
+
+    async def update_password(self, *args) -> None:
+        self._user_adapter.update_password(args)
+
+
+    async def update_email(self, *args) -> None:
+        self._user_adapter.update_email(args)
+
+
+    async def update_way_notify(self, *args) -> None:
+        self._user_adapter.update_way_notify(args)
+
+
+    async def delete_user(self, *args) -> None:
+        self._user_adapter.delete_user(args)
+
+
+    async def add_vacancy(self, *args) -> None:
+        self._vacancies_adapter.add_vacancy(args)
+
+
+    async def get_vacancies(self):
+        self._vacancies_adapter.get_vacancies()
+
+
+    async def del_vacancies(self) -> None:
         pass
 
-    def get_password(self, *args) -> bool:
+
+    async def add_query(self, *args) -> None:
         pass
 
-    def get_email(self, *args) -> bool:
+    async def get_query(self):
         pass
 
-    def get_way_notify(self, *args) -> bool:
-        pass
-
-    def update_username(self, *args) -> bool:
-        pass
-
-    def update_password(self, *args) -> bool:
-        pass
-
-    def update_email(self, *args) -> bool:
-        pass
-
-    def update_way_notify(self, *args) -> bool:
-        pass
-
-    def delete_user(self, *args) -> bool:
-        pass
-
-    def add_vacancy(self, *args) -> None:
-        pass
-
-    def get_vacancies(self) -> tuple[str]:
-        pass
-
-    def del_vacancies(self) -> tuple[str]:
-        pass
-
-    def add_query(self, *args) -> None:
-        pass
-
-    def get_query(self) -> tuple[str]:
-        pass
-
-    def del_query(self) -> tuple[str]:
+    async def del_query(self) -> None:
         pass
 
 

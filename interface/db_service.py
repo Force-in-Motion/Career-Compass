@@ -112,10 +112,15 @@ class AQueriesAdapter(ABC):
 
 
 class AFacade(ABC):
-    def __init__(self, db_init: ADBInit, user_adapter: AUserAdapter, queries_adapter: AQueriesAdapter):
+    def __init__(self, db_init: ADBInit,
+                       user_adapter: AUserAdapter,
+                       queries_adapter: AQueriesAdapter,
+                       vacancies_adapter: AVacanciesAdapter):
+
         self._db_init = db_init
         self._user_adapter = user_adapter
         self._queries_adapter = queries_adapter
+        self._vacancies_adapter = vacancies_adapter
         self._db_init.init_db()
 
     @abstractmethod

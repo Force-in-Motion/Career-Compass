@@ -28,16 +28,6 @@
                     )
                     """,
 
-                'user_vacancies': """
-                    CREATE TABLE IF NOT EXISTS user_vacancies (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    user_id INTEGER,
-                    vacancy_id INTEGER,
-                    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-                    FOREIGN KEY(vacancy_id) REFERENCES vacancies(id) ON DELETE CASCADE
-                    )
-                    """,
-
                 'queries_table': """
                     CREATE TABLE IF NOT EXISTS Queries (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,

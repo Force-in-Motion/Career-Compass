@@ -1,4 +1,4 @@
-from interface.db.adapter.init import ADBInit
+from interface.db_service import ADBInit
 from service.db_service.sqlite.requests.table import creating_tables as ct
 from tools.data_access import Connector as c
 
