@@ -15,9 +15,9 @@ class DatabaseFacade(AFacade):
 
     async def add_user(self, *args) -> None:
         """
-        Добавляет пользователя
-        :param args:
-        :return:
+        Добавляет пользователя в базу данных
+        :param args: данные пользователя
+        :return:None
         """
         self._user_adapter.add_user(args)
 
