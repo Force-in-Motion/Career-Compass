@@ -1,6 +1,7 @@
 import os
-import aiosqlite
+from contextlib import asynccontextmanager
 
+import aiosqlite
 
 
 class FileUtils:
@@ -24,13 +25,16 @@ class FileUtils:
 class Connector:
 
     @staticmethod
-    async def sqlite_connect(query: str, params: tuple = ()):
+    @asynccontextmanager
+    async def sqlite_connect(query: str, params: tuple = (), commit: bool = True):
         """
-        Выполняет SQL-запрос с параметрами (если есть) и возвращает курсор.
+        Асинхронный контекстный менеджер для выполнения SQL-запросов с параметрами.
 
         :param query: SQL-запрос в виде строки
         :param params: кортеж параметров для запроса (по умолчанию пустой)
-        :return: sqlite3.connect, sqlite3.cursor
+        :param commit: выполнять ли commit для изменений в БД (по умолчанию True)
+        :yield: курсор для работы с результатами запроса
+        :raises RuntimeError: если произошла ошибка при выполнении запроса
         """
         connect = await aiosqlite.connect(FileUtils.get_path())
         cursor = await connect.cursor()
@@ -40,21 +44,16 @@ class Connector:
                 await cursor.execute(query, params)
             else:
                 await cursor.execute(query)
+            yield cursor
 
-            return cursor, connect
+            if commit:
+                await connect.commit()
 
         except Exception as e:
+            await connect.rollback()
             raise RuntimeError(f"Ошибка при выполнении запроса: {e}")
 
-
-    @staticmethod
-    async def sqlite_close(connect, cursor) -> None:
-        """
-        Закрывает соединение если оно открыто
-        :param connect: объект соединения
-        :param cursor: объект курсора
-        :return:None
-        """
-        if connect:
-            await connect.close()
+        finally:
             await cursor.close()
+            await connect.close()
+

@@ -15,24 +15,18 @@ class UserAdapter(AUserAdapter):
         self._cursor = None
 
 
-    async def add_user(self, *args) -> None:
+    async def add_user(self, *args) -> bool:
         """
         Добавляет данные пользователя в базу в случае успешного выполнения запроса
         :param args: данные пользователя
         :return:
         """
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('add_user'), *args)
-
-            await self._connect.commit()
+        async with c.sqlite_connect(ur.get('add_user'), *args) as self._cursor:
 
             logger.debug('add_user успешно добавила пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при добавлении пользователя: {e}")
+            return True
 
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
 
 
     async def get_all_username(self) -> tuple[tuple[str]]:
@@ -40,20 +34,12 @@ class UserAdapter(AUserAdapter):
         Получает данные пользователя из базы в случае успешного выполнения запроса
         :return: имена всех пользователей
         """
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('get_all_user_name'))
+        async with c.sqlite_connect(ur.get('get_all_user_name'), commit=False) as self._cursor:
 
             result = await self._cursor.fetchall()
 
             logger.debug('get_all_username вернула %s', result)
 
-            return result
-
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении списка имен всех пользователей: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
 
 
     async def get_userid_by_username_and_telegramid(self, *args) -> tuple[str]:
@@ -62,8 +48,7 @@ class UserAdapter(AUserAdapter):
         :param args: пароль конкретного пользователя
         :return:
         """
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('get_id'), *args)
+        async with c.sqlite_connect(ur.get('get_id'), *args, commit=False) as self._cursor:
 
             result = await self._cursor.fetchone()
 
@@ -72,21 +57,13 @@ class UserAdapter(AUserAdapter):
             return result
 
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении списка имен всех пользователей: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
-
-
     async def get_password_by_username_and_telegramid(self, *args) -> tuple[str]:
         """
         Получает пароль пользователя из базы в случае успешного выполнения запроса
         :param args: пароль конкретного пользователя
         :return:
         """
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('get_password'), *args)
+        async with c.sqlite_connect(ur.get('get_password'), *args, commit=False) as self._cursor:
 
             result = await self._cursor.fetchone()
 
@@ -95,16 +72,9 @@ class UserAdapter(AUserAdapter):
             return result
 
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении списка имен всех пользователей: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
-
     async def get_email_by_username_and_telegramid(self, *args) -> tuple[str]:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('get_email'), *args)
+        async with c.sqlite_connect(ur.get('get_email'), *args, commit=False) as self._cursor:
 
             result = await self._cursor.fetchone()
 
@@ -113,17 +83,9 @@ class UserAdapter(AUserAdapter):
             return result
 
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
-
-
     async def get_way_notify_by_username_and_telegramid(self, *args) -> tuple[str]:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('get_way_notify'), *args)
+        async with c.sqlite_connect(ur.get('get_way_notify'), *args, commit=False) as self._cursor:
 
             result = await self._cursor.fetchone()
 
@@ -131,90 +93,50 @@ class UserAdapter(AUserAdapter):
 
             return result
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
 
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+    async def update_username_by_password_and_telegramid(self, *args) -> bool:
 
-
-    async def update_username_by_password_and_telegramid(self, *args) -> None:
-
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('update_username'), *args)
-
-            await self._connect.commit()
+        async with c.sqlite_connect(ur.get('update_username'), *args) as self._cursor:
 
             logger.debug('update_username успешно обновила имя пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+            return True
 
 
-    async def update_password_by_username_and_telegramid(self, *args) -> None:
+    async def update_password_by_username_and_telegramid(self, *args) -> bool:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('update_password'), *args)
-
-            await self._connect.commit()
+        async with c.sqlite_connect(ur.get('update_password'), *args) as self._cursor:
 
             logger.debug('update_password успешно обновила пароль пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+            return True
 
 
-    async def update_email_by_username_and_telegramid(self, *args) -> None:
+    async def update_email_by_username_and_telegramid(self, *args) -> bool:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('update_email'), *args)
-
-            await self._connect.commit()
+        async with c.sqlite_connect(ur.get('update_email'), *args) as self._cursor:
 
             logger.debug('update_email успешно обновила email пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+            return True
 
 
-    async def update_way_notify_by_username_and_telegramid(self, *args) -> None:
+    async def update_way_notify_by_username_and_telegramid(self, *args) -> bool:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('update_way_notify'), *args)
-
-            await self._connect.commit()
+        async with c.sqlite_connect(ur.get('update_way_notify'), *args) as self._cursor:
 
             logger.debug('update_way_notify успешно обновила способ уведомления пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+            return True
 
 
-    async def delete_user_by_username_and_telegramid(self, *args) -> None:
+    async def delete_user_by_username_and_telegramid(self, *args) -> bool:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(ur.get('del_user'), *args)
-
-            await self._connect.commit()
+        async with c.sqlite_connect(ur.get('del_user'), *args) as self._cursor:
 
             logger.debug('delete_user успешно удалила пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении email пользователя: {e}")
+            return True
 
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
 
 
