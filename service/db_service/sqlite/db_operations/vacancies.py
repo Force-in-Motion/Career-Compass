@@ -15,6 +15,7 @@ class VacancyAdapter(AVacanciesAdapter):
 
 
     async def add_vacancy(self, **kwargs) -> None:
+
         try:
             self._cursor, self._connect = await c.sqlite_connect(v.get('add_vacancy'), **kwargs)
 
