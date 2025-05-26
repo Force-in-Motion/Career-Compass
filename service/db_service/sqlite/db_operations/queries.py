@@ -21,7 +21,7 @@ class QueriesAdapter(AQueriesAdapter):
         :param args: user_id, city, profession, salary_min, experience_level
         :return: None
         """
-        with c.sqlite_connect(qr.get('add_query'), *args):
+        with c.sqlite_connect(qr.get('add_query'), *args) as self._cursor:
 
             logger.debug('add_query_by_userid успешно добавила параметры поиска работы пользователя')
 
@@ -34,7 +34,7 @@ class QueriesAdapter(AQueriesAdapter):
         :param args: user_id
         :return: tuple[str]
         """
-        with c.sqlite_connect(qr.get('get_query'), *args, commit=False):
+        with c.sqlite_connect(qr.get('get_query'), *args, commit=False) as self._cursor:
 
             result = await self._cursor.fetchone()
 
@@ -49,7 +49,7 @@ class QueriesAdapter(AQueriesAdapter):
         :param args: user_id, city, profession, salary_min, experience_level
         :return: None
         """
-        with c.sqlite_connect(qr.get('update_query'), *args):
+        with c.sqlite_connect(qr.get('update_query'), *args) as self._cursor:
 
             logger.debug('update_query_by_userid успешно обновила параметры поиска работы пользователя')
 
@@ -62,7 +62,7 @@ class QueriesAdapter(AQueriesAdapter):
         :param args: user_id
         :return: None
         """
-        with c.sqlite_connect(qr.get('del_query'), *args):
+        with c.sqlite_connect(qr.get('del_query'), *args) as self._cursor:
 
             logger.debug('del_query_by_userid успешно удалила параметры поиска работы пользователя')
 

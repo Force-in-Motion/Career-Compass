@@ -14,25 +14,18 @@ class VacancyAdapter(AVacanciesAdapter):
         self._cursor = None
 
 
-    async def add_vacancy(self, **kwargs) -> None:
+    async def add_vacancy(self, **args) -> bool:
 
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(v.get('add_vacancy'), **kwargs)
-
-            self._connect.commit()
+        with c.sqlite_connect(v.get('add_vacancy'), *args) as self._cursor:
 
             logger.debug('add_vacancy успешно добавила данные о желаемой вакансии')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при добавлении вакансии: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+            return True
 
 
-    async def get_vacancies(self) -> tuple[str]:
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(v.get('get_vacancies'))
+    async def get_vacancies(self, *args) -> tuple[str]:
+
+        with c.sqlite_connect(v.get('get_vacancies'), *args) as self._cursor:
 
             result = await self._cursor.fetchone()
 
@@ -40,23 +33,12 @@ class VacancyAdapter(AVacanciesAdapter):
 
             return result
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении вакансий: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
 
 
-    async def del_vacancies(self) -> None:
-        try:
-            self._cursor, self._connect = await c.sqlite_connect(v.get('get_vacancies'))
+    async def del_vacancies(self, *args) -> bool:
 
-            self._connect.commit()
+        with c.sqlite_connect(v.get('get_vacancies'), *args) as self._cursor:
 
             logger.debug('del_vacancies удалила вакансии для конкретного пользователя')
 
-        except Exception as e:
-            raise RuntimeError(f"Ошибка при получении вакансий: {e}")
-
-        finally:
-            await c.sqlite_close(self._connect, self._cursor)
+            return True
