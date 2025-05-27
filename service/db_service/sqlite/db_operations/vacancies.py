@@ -15,10 +15,14 @@ class VacancyAdapter(AVacanciesAdapter):
 
 
     async def add_vacancy(self, **args) -> bool:
-
+        """
+        Добавляет все данные о конкретной вакансии в базу данных
+        :param args: принимает данные о вакансии
+        :return: bool
+        """
         with c.sqlite_connect(v.get('add_vacancy'), *args) as self._cursor:
 
-            logger.debug('add_vacancy успешно добавила данные о желаемой вакансии')
+            logger.debug('add_vacancy успешно добавила данные о желаемой вакансии:', *args)
 
             return True
 
@@ -29,7 +33,7 @@ class VacancyAdapter(AVacanciesAdapter):
 
             result = await self._cursor.fetchone()
 
-            logger.debug('get_vacancies вернула вакансии для конкретного пользователя')
+            logger.debug('get_vacancies вернула вакансии для конкретного пользователя', result)
 
             return result
 
@@ -39,6 +43,6 @@ class VacancyAdapter(AVacanciesAdapter):
 
         with c.sqlite_connect(v.get('get_vacancies'), *args) as self._cursor:
 
-            logger.debug('del_vacancies удалила вакансии для конкретного пользователя')
+            logger.debug('del_vacancies удалила вакансии для конкретного пользователя', *args)
 
             return True
